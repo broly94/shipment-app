@@ -4,7 +4,7 @@ import { ShipmentItem } from './ShipmentItem';
 import { dataShipment } from '@/data/dataShipment';
 
 import Grid from '@mui/material/Grid';
-
+import { Box } from '@mui/system';
 
 
 export const ShipmentList = () => {
@@ -15,23 +15,18 @@ export const ShipmentList = () => {
     persistDataState(dataShipment)
   }, [])
 
-
   return (
-    <Grid
-      container
-      item
-      xs={12}
+    <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        padding: '20px'
+        flexWrap: 'wrap',
+        height: '60%',
       }}
     >
-
       {
         state.map(item => <ShipmentItem key={item.id} interval={item} />)
       }
-
-    </Grid>
+    </Box>
   )
 }

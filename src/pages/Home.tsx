@@ -1,19 +1,20 @@
-import { Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { ShipmentList } from '@/components/ShipmentList'
 
 export const Home = () => {
   return (
-    <Grid 
-    container
+    <Box 
     sx={{
       display: 'flex',
+      alignItems: 'center',
       justifyContent: 'center',
-      width: '100%',
+      flexDirection: 'column',
       height: '100vh',
-      padding: '20px',
+      width: '100vw',
     }}
     >
+      <Typography variant="h2" color="initial" sx={{marginBottom: '20px'}}>Reserve su moto para el envio</Typography>
       <ShipmentList />
-    </Grid>
+    </Box>
   )
 }

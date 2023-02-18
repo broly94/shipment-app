@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppState, ShipmentData } from "@/interfaces/types"
 import { ShipmentContext } from "./ShipmentContext"
+import { setDataLocalStorage } from '@/helpers/localStorage';
 
 export const INITIAL_STATE = {
     infoInterval: [
@@ -23,6 +24,7 @@ export const ShipmentProvider = ({ children }: ShipmentProviderProps) => {
     const [state, setSection] = React.useState<AppState["shipmentState"]>(INITIAL_STATE.infoInterval)
 
     const persistDataState = (data: ShipmentData[]) => {
+        setDataLocalStorage({ ShipmentData: data })
         setSection(data)
     }
 

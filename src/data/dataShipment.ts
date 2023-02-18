@@ -3,7 +3,7 @@ export const dataShipment = [
         id: 0,
         time: '8:00',
         motocycle: 8,
-        enable: true
+        enable: false
     },
     {
         id: 1,
