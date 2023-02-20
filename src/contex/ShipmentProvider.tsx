@@ -2,16 +2,13 @@ import React from 'react';
 import { AppState, ShipmentData } from "@/interfaces/types"
 import { ShipmentContext } from "./ShipmentContext"
 import { setDataLocalStorage } from '@/helpers/localStorage';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+// import { dataShipment } from '@/data/dataShipment';
 
-export const INITIAL_STATE = {
-    infoInterval: [
-        {
-            id: 0,
-            time: '00:00',
-            motocycle: 8,
-            enable: true
-        }
-    ]
+const stateApp = useLocalStorage()
+
+export const INITIAL_STATE: AppState = {
+    shipmentState: stateApp
 }
 
 
@@ -21,15 +18,30 @@ interface ShipmentProviderProps {
 
 export const ShipmentProvider = ({ children }: ShipmentProviderProps) => {
 
-    const [state, setSection] = React.useState<AppState["shipmentState"]>(INITIAL_STATE.infoInterval)
+    const [state, setState] = React.useState(INITIAL_STATE)
 
-    const persistDataState = (data: ShipmentData[]) => {
-        setDataLocalStorage({ ShipmentData: data })
-        setSection(data)
+    const setToggleDataEnable = (id: number, motocycle: number) => {
+        setState({
+            shipmentState: state.shipmentState.map(({ ...shipment }) => {
+                if (shipment.id === id) {
+                    shipment.enable = !shipment.enable
+                    !shipment.enable ? shipment.motocycle = motocycle - 1 : shipment.motocycle = motocycle + 1
+                }
+                return shipment
+            })
+        })
+
     }
 
+
+    React.useEffect(() => {
+        setDataLocalStorage({ ShipmentData: state.shipmentState })
+    }, [state])
+
+
+
     return (
-        <ShipmentContext.Provider value={{ state, persistDataState }}>
+        <ShipmentContext.Provider value={{ state, setToggleDataEnable }}>
             {children}
         </ShipmentContext.Provider>
     )

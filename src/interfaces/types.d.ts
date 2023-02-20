@@ -1,7 +1,7 @@
 export interface ShipmentData {
-    id: number
-    time: string
-    motocycle: number
+    id?: number
+    time?: string
+    motocycle?: number
     enable: boolean
 }
 

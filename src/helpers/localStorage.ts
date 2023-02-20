@@ -5,11 +5,11 @@ interface setDataLocalStorageProps {
 }
 
 export const setDataLocalStorage = ({ShipmentData}: setDataLocalStorageProps) => {
-    localStorage.setItem("ShipmentData", JSON.stringify(ShipmentData))
+    return localStorage.setItem("ShipmentData", JSON.stringify(ShipmentData))
 }
 
-export const getDataLocalStorage = () => {
-    return JSON.parse(localStorage.getItem("ShipmentData")? toString() : 'No existen datos')
+export const getDataLocalStorage = ()=> {
+    return JSON.parse(localStorage.getItem("ShipmentData") || "[]")
 }
 
 export const deleteDataLocalStorage = () => {

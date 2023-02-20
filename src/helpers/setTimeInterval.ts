@@ -6,7 +6,6 @@ interface setTimeIntervalProps {
 }
 
 export const setTimeInterval = ({time}: setTimeIntervalProps) => {
-
     const date = moment(time, "HH:mm")
     const intervalTime = date.format('HH:mm')
     return intervalTime

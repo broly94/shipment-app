@@ -8,19 +8,22 @@ import { verifyEnableInterval } from '@/helpers/verifyEnableInterval';
 
 interface ShipmentItemProps {
   interval: ShipmentData
+  setToggleDataEnable: (id: number, motocycle: number) => void
 }
 
 
-export const ShipmentItem = ({ interval }: ShipmentItemProps) => {
+export const ShipmentItem = ({ interval, setToggleDataEnable }: ShipmentItemProps) => {
 
-  const { time, motocycle, enable } = interval
+  const { id, time, motocycle, enable } = interval
 
-  const date: string = setTimeInterval({ time })
+  const date: string = setTimeInterval({ time: time!! })
 
   const enableInterval = verifyEnableInterval({ enable })
 
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("funciona")
+    event.preventDefault()
+      setToggleDataEnable(id!!, motocycle!!)
   }
 
   return (
@@ -34,12 +37,12 @@ export const ShipmentItem = ({ interval }: ShipmentItemProps) => {
         flexWrap: 'wrap',
         textAlign: 'center',
         borderRadius: '1rem',
-        margin: '5px',
-        transition: '0.1s ease-in-out',
-        border: '2px solid black',
+        margin: '10px',
+        transition: enable ? '0.1s ease-in-out' : '',
+        border: enable ? "2px solid white" : '2px solid red',
         '&:hover': {
-          transform: 'translate(0px, -5px)',
-          boxShadow: '0px 0px 19px 11px rgba(0,0,0,0.2)',
+          transform: enable ? 'translate(0px, -5px)' : '',
+          boxShadow: enable ? '0px -4px 29px -16px rgba(255,255,255,0.8),0px 10px 15px -3px rgba(0,0,0,0.1);' : '',
           border: enableInterval,
           cursor: 'pointer'
         }
@@ -53,11 +56,10 @@ export const ShipmentItem = ({ interval }: ShipmentItemProps) => {
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
-
         }}
       >
-        <Typography variant="h6" color="initial">Hora: {date}</Typography>
-        <Typography variant="h6" color="initial">Motocicletas disponibles: {motocycle}</Typography>
+        <Typography variant="h6" color="white">Hora: {date}</Typography>
+        <Typography variant="h6" color="white">Motocicletas disponibles: {motocycle}</Typography>
       </Box>
     </Box>
   )

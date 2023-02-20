@@ -4,6 +4,7 @@ import { ShipmentList } from '@/components/ShipmentList'
 export const Home = () => {
   return (
     <Box 
+    className="home-container"
     sx={{
       display: 'flex',
       alignItems: 'center',
@@ -13,7 +14,7 @@ export const Home = () => {
       width: '100vw',
     }}
     >
-      <Typography variant="h2" color="initial" sx={{marginBottom: '20px'}}>Reserve su moto para el envio</Typography>
+      <Typography variant="h2" color="initial" sx={{marginBottom: '20px'}} className="title">Reserve su moto para el envio</Typography>
       <ShipmentList />
     </Box>
   )

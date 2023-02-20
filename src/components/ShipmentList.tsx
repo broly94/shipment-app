@@ -1,19 +1,16 @@
 import React from 'react';
 import { ShipmentContext } from '@/contex/ShipmentContext';
 import { ShipmentItem } from './ShipmentItem';
-import { dataShipment } from '@/data/dataShipment';
 
-import Grid from '@mui/material/Grid';
+
 import { Box } from '@mui/system';
 
 
 export const ShipmentList = () => {
 
-  const { state, persistDataState } = React.useContext(ShipmentContext)
+  const { state, setToggleDataEnable } = React.useContext(ShipmentContext)
 
-  React.useEffect(() => {
-    persistDataState(dataShipment)
-  }, [])
+  const { shipmentState } = state
 
   return (
     <Box
@@ -22,10 +19,11 @@ export const ShipmentList = () => {
         justifyContent: 'center',
         flexWrap: 'wrap',
         height: '60%',
+        width: '80%'
       }}
     >
       {
-        state.map(item => <ShipmentItem key={item.id} interval={item} />)
+        shipmentState.map(item => <ShipmentItem key={item.id} interval={item} setToggleDataEnable={setToggleDataEnable} />)
       }
     </Box>
   )
