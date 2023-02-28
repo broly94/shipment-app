@@ -1,9 +1,9 @@
 import { AppState, ShipmentData } from '@/interfaces/types';
 import React from 'react';
 
-export interface ContextContextProps {
+export interface Props {
     state: AppState,
-    setToggleDataEnable: (id: number, motocycle: number) => void
+    setState: React.Dispatch<React.SetStateAction<AppState>>,
 }
 
-export const ShipmentContext = React.createContext<ContextContextProps>({} as ContextContextProps)
+export const ShipmentContext = React.createContext<Props>({} as Props)

@@ -1,16 +1,16 @@
-interface verifyEnableIntervalProps {
+interface Props {
     enable: boolean
 }
 
 const styleTrue = {
-    border: '2px solid green'
+    border: '2px solid #34465D'
 }
 
 const styleFalse = {
-    border: '2px solid red'
+    border: '2px solid green'
 }
 
 
-export const verifyEnableInterval = ({enable} :verifyEnableIntervalProps) => {
+export const verifyEnableIntervalStyle = ({enable} :Props) => {
     return (enable ? styleTrue : styleFalse)
 }

@@ -1,47 +1,35 @@
 import React from 'react';
-import { AppState, ShipmentData } from "@/interfaces/types"
+import { AppState, ShipmentData, User } from "@/interfaces/types"
 import { ShipmentContext } from "./ShipmentContext"
-import { setDataLocalStorage } from '@/helpers/localStorage';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-// import { dataShipment } from '@/data/dataShipment';
+import { setDataLocalStorage } from '@/hooks/useLocalStorage';
+import { useSetDataInitialState } from '@/hooks/useSetDataInitialState';
+// Esta data puede venir de cualquier base de datos
+import { dataShipment } from '@/data/dataShipment';
+import { dataUsers } from '@/data/dataUser';
+import { dataLocations } from '@/data/dataLocations';
 
-const stateApp = useLocalStorage()
+// const shipmentDataInitialState: ShipmentData[] = useSetDataInitialState({keyData: "shipmentDataLocal",  defaultData: { shipmentData: dataShipment, user: dataUsers}})
+
+// const userDataInitialState: User = useSetDataInitialState({keyData: "userDataLocal", defaultData: { shipmentData: dataShipment, user: dataUsers}})
+
 
 export const INITIAL_STATE: AppState = {
-    shipmentState: stateApp
+    shipmentState: dataShipment,
+    users: dataUsers,
+    locations: dataLocations
 }
 
 
-interface ShipmentProviderProps {
+interface Props {
     children: JSX.Element | JSX.Element[]
 }
 
-export const ShipmentProvider = ({ children }: ShipmentProviderProps) => {
+export const ShipmentProvider = ({ children }: Props) => {
 
     const [state, setState] = React.useState(INITIAL_STATE)
 
-    const setToggleDataEnable = (id: number, motocycle: number) => {
-        setState({
-            shipmentState: state.shipmentState.map(({ ...shipment }) => {
-                if (shipment.id === id) {
-                    shipment.enable = !shipment.enable
-                    !shipment.enable ? shipment.motocycle = motocycle - 1 : shipment.motocycle = motocycle + 1
-                }
-                return shipment
-            })
-        })
-
-    }
-
-
-    React.useEffect(() => {
-        setDataLocalStorage({ ShipmentData: state.shipmentState })
-    }, [state])
-
-
-
     return (
-        <ShipmentContext.Provider value={{ state, setToggleDataEnable }}>
+        <ShipmentContext.Provider value={{ state, setState }}>
             {children}
         </ShipmentContext.Provider>
     )

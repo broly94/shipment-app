@@ -11,12 +11,10 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #353535;
 }
-body .title {
-  color: white;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+body .alert {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: green;
 }/*# sourceMappingURL=style.css.map */
