@@ -9,35 +9,38 @@ export const SelectLocation = () => {
 
   const { state, setState } = React.useContext(ShipmentContext)
 
-  const [location, setLocation] = React.useState('')
-
-  const [shipmetFilter, setShipmentFilter] = React.useState<ShipmentData[]>([])
+  const [table, setTable] = React.useState<ShipmentData[]>([])
+  
+  const [search, setSearch] = React.useState<string>('')
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation(event.target.value);
+    setSearch(event.target.value);
     filtro(event.target.value)
   }
 
   const filtro = (filtroBusqueda: string) => {
-    let resultadosBusqueda = state.shipmentState.filter(elemento => {
+    let resultadosBusqueda = table.filter(elemento => {
       if (elemento.city.toString().toLowerCase().includes(filtroBusqueda.toString().toLocaleLowerCase())) {
         return elemento
-      }else {
-        state.shipmentState
       }
     })
-    setShipmentFilter(resultadosBusqueda)
-    
+    setState({
+      shipmentState: resultadosBusqueda,
+      users: { ...state.users },
+      locations: { ...state.locations }
+    })
+
   }
 
   React.useEffect(() => {
     setState({
       shipmentState: dataShipment,
-      users: {...state.users},
-      locations: {...state.locations}
+      users: { ...state.users },
+      locations: { ...state.locations }
     })
-    setShipmentFilter(dataShipment)
+    setTable(dataShipment)
+    console.log(table)
   }, [])
 
   return (
@@ -47,7 +50,7 @@ export const SelectLocation = () => {
         label="Search field"
         type="search"
         variant="filled"
-        value={location}
+        value={search}
         onChange={handleChange}
       />
     </Box>
