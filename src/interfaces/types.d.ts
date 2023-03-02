@@ -1,3 +1,4 @@
+
 export interface ShipmentData {
     id: number
     time: string
@@ -13,13 +14,8 @@ export interface User {
     hoursShipments: string[]
 }
 
-export interface Locations {
-    id: number
-    name: string
-}
-
 export interface AppState {
     shipmentState: ShipmentData[]
     users: User[],
-    locations: Locations[]
+    search: ShipmentData[]
 }

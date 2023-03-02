@@ -2,13 +2,12 @@ import { ShipmentContext } from '@/contex/ShipmentContext'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
-import { AlertMessage } from './AlertMessage'
 
 export const ShipmentQuantity = () => {
 
     const { state } = React.useContext(ShipmentContext)
 
-    const quantityShipment = state.shipmentState.filter(interval => interval.enable === false && interval)
+    const quantityShipment = state.search.filter(interval => interval.enable === false && interval)
     
     return (
         <Box

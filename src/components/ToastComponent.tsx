@@ -1,4 +1,3 @@
-import React from 'react'
 import { toast } from 'react-toastify';
 
 interface Props {
@@ -15,7 +14,7 @@ export const ToastComponent = ({ enable, type, messageSuccess,  messageCanceledO
     if(type === 'shipment'){
         Toast = enable ?
         toast.success(messageSuccess, {
-            position: "top-left",
+            position: "top-right",
             autoClose: 2500,
             hideProgressBar: false,
             closeOnClick: true,
@@ -25,7 +24,7 @@ export const ToastComponent = ({ enable, type, messageSuccess,  messageCanceledO
             theme: "light",
         }) :
         toast.warn(messageCanceledOrError, {
-            position: "top-left",
+            position: "top-right",
             autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,

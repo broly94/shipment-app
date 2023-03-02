@@ -1,8 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { ShipmentList } from '@/components/Home/ShipmentList'
 import { ShipmentQuantity } from '@/components/Home/ShipmentQuantity'
-import { SelectLocation } from '@/components/Home/SelectLocation'
-
 
 export const Home = () => {
   return (
@@ -42,7 +40,6 @@ export const Home = () => {
       </Typography>
 
       <ShipmentQuantity />
-      <SelectLocation />
       <ShipmentList />
     </Box>
   )

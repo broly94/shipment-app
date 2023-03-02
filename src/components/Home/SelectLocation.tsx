@@ -2,56 +2,51 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
 import { ShipmentContext } from '@/contex/ShipmentContext'
-import { dataShipment } from '@/data/dataShipment';
-import { ShipmentData } from '@/interfaces/types';
 
 export const SelectLocation = () => {
 
   const { state, setState } = React.useContext(ShipmentContext)
 
-  const [table, setTable] = React.useState<ShipmentData[]>([])
-  
-  const [search, setSearch] = React.useState<string>('')
-
+  const [term, setTerm] = React.useState<string>('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    setTerm(event.target.value);
     filtro(event.target.value)
   }
 
-  const filtro = (filtroBusqueda: string) => {
-    let resultadosBusqueda = table.filter(elemento => {
-      if (elemento.city.toString().toLowerCase().includes(filtroBusqueda.toString().toLocaleLowerCase())) {
+  const filtro = (filterSearch: string) => {
+    let resultSearch = state.search.filter(elemento => {
+      if (elemento.city.toString().toLowerCase().includes(filterSearch.toString().toLocaleLowerCase())) {
         return elemento
       }
     })
     setState({
-      shipmentState: resultadosBusqueda,
-      users: { ...state.users },
-      locations: { ...state.locations }
+      shipmentState: resultSearch,
+      users: state.users,
+      search: state.search
     })
-
   }
 
   React.useEffect(() => {
     setState({
-      shipmentState: dataShipment,
-      users: { ...state.users },
-      locations: { ...state.locations }
+      shipmentState: state.shipmentState,
+      users: state.users,
+      search: state.search
     })
-    setTable(dataShipment)
-    console.log(table)
   }, [])
 
+
   return (
-    <Box sx={{ minWidth: 600 }}>
+    <Box sx={{ minWidth: '70%' }}>
       <TextField
-        id="filled-search"
-        label="Search field"
+        id="outlined-search"
+        label="Busca por localidad"
         type="search"
-        variant="filled"
-        value={search}
+        value={term}
         onChange={handleChange}
+        fullWidth
+        focused
+        color='grey'
       />
     </Box>
   )

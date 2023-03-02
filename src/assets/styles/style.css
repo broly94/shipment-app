@@ -11,10 +11,4 @@ html {
 body {
   margin: 0;
   padding: 0;
-}
-body .alert {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: green;
 }/*# sourceMappingURL=style.css.map */

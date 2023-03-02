@@ -3,12 +3,11 @@ import { ShipmentContext } from '@/contex/ShipmentContext';
 import { ShipmentItem } from './ShipmentItem';
 
 import { Box } from '@mui/system';
+import { SelectLocation } from './SelectLocation';
 
 export const ShipmentList = () => {
 
   const { state, setState } = React.useContext(ShipmentContext)
-
-  const { shipmentState } = state
 
   const setToggleDataEnable = (id: number, motocycle: number) => {
 
@@ -20,11 +19,16 @@ export const ShipmentList = () => {
         }
         return shipment
       }),
-      users: {
-        ...state.users
-      },
-      locations: {...state.locations}
+      users: state.users,
+      search: state.search.map(({ ...shipment }) => {
+        if (shipment.id === id) {
+          shipment.enable = !shipment.enable
+          !shipment.enable ? shipment.motocycle = motocycle - 1 : shipment.motocycle = motocycle + 1
+        }
+        return shipment
+      }) 
     })
+
   }
 
   return (
@@ -43,10 +47,11 @@ export const ShipmentList = () => {
         }
       }}
     >
+      <SelectLocation />
       {
-        shipmentState.map(item => <ShipmentItem key={item.id} state={item} setToggleDataEnable={setToggleDataEnable} />)
+        state.shipmentState.map(item => <ShipmentItem key={item.id} state={item} setToggleDataEnable={setToggleDataEnable} />)
       }
-      
+
     </Box>
   )
 }

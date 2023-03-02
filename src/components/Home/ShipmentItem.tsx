@@ -17,7 +17,6 @@ interface Props {
   setToggleDataEnable: (id: number, motocycle: number) => void
 }
 
-
 export const ShipmentItem = ({ state, setToggleDataEnable }: Props) => {
 
   const { id, time, motocycle, city, enable } = state
@@ -28,13 +27,15 @@ export const ShipmentItem = ({ state, setToggleDataEnable }: Props) => {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    setToggleDataEnable(id, motocycle)
-    ToastComponent({
-      enable,
-      type: 'shipment',
-      messageSuccess: 'Envio agendado!',
-      messageCanceledOrError: 'Envio cancelado!'
-    })
+    if (motocycle > 0) {
+      setToggleDataEnable(id, motocycle)
+      ToastComponent({
+        enable,
+        type: 'shipment',
+        messageSuccess: 'Envio agendado!',
+        messageCanceledOrError: 'Envio cancelado!'
+      })
+    }
   }
 
   return (
@@ -49,11 +50,11 @@ export const ShipmentItem = ({ state, setToggleDataEnable }: Props) => {
         textAlign: 'center',
         margin: '20px',
         transition: enable ? '0.1s ease-in-out' : '',
-        border: enable ? "2px solid #34465D" : '2px solid green',
+        border: motocycle == 0 ? '2px solid red' : '' || enable ? "2px solid #34465D" : '2px solid green',
         '&:hover': {
-          transform: enable ? 'translate(-5px, -5px)' : '',
-          boxShadow: enable ? '8px 8px 0px -3px rgba(0,0,0,0.6);' : '',
-          border: toggleEnableIntervalStyle,
+          transform: motocycle == 0 ? 'translate(0px, 0px)' : '' || enable ? 'translate(-5px, -5px)' : '',
+          boxShadow: motocycle == 0 ? 'none' : '' || enable ? '8px 8px 0px -3px rgba(0,0,0,0.6);' : '',
+          border: motocycle == 0 ? '2px solid red' : '' || toggleEnableIntervalStyle,
           cursor: 'pointer'
         }
       }}
