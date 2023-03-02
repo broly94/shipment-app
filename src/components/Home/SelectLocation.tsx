@@ -46,7 +46,7 @@ export const SelectLocation = () => {
         onChange={handleChange}
         fullWidth
         focused
-        color='grey'
+        color='primary'
       />
     </Box>
   )

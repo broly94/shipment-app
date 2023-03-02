@@ -36,7 +36,7 @@ export const Home = () => {
           fontFamily: 'Helvetica',
           textTransform: 'uppercase',
         }}
-      >Reserva tu moto envio cuando desees
+      >Reserva tu moto ahora es mas facil
       </Typography>
 
       <ShipmentQuantity />
